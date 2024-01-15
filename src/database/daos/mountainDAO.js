@@ -13,6 +13,13 @@ class MountainDAO {
         return mountain;
     }
 
+    async getMountainHikers(id) {
+        const query = 'SELECT * FROM Hiker WHERE Id IN (SELECT HikerId FROM HikeResult WHERE MountainId = ?);';
+        const [hikers] = await db.query(query, [id]);
+        return hikers;
+    }
+
+
     async addMountain(name, height, country, latitude, longitude) {
         const query = 'INSERT INTO Mountain (Name, Height, Country, Latitude, Longitude) VALUES (?, ?, ?, ?, ?)';
         const result = await db.query(query, [name, height, country, latitude, longitude]);

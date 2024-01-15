@@ -13,6 +13,12 @@ class HikerDAO {
         return hiker;
     }
 
+    async getHikerMountains(id) {
+        const query = 'SELECT * FROM Mountain WHERE Id IN (SELECT MountainId FROM HikeResult WHERE HikerId = ?);';
+        const [mountains] = await db.query(query, [id]);
+        return mountains;
+    }
+
     async addHiker(firstName, lastName, age, guide) {
         const query = 'INSERT INTO Hiker (FirstName, LastName, Age, Guide) VALUES (?, ?, ?, ?)';
         const result = await db.query(query, [firstName, lastName, age, guide]);

@@ -30,6 +30,21 @@ router.get('/hiker/:id', async (req, res) => {
     }
 });
 
+// Get all hiker mountains
+router.get('/hiker/:id/mountains', async (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+        const mountains = await hikerDAO.getHikerMountains(id);
+        if (mountains.length > 0) {
+            res.json(mountains);
+        } else {
+            res.status(404).send('Mountains not found for hiker');
+        }
+    } catch (error) {
+        res.status(500).send('Error retrieving mountains for hiker: ' + error.message);
+    }
+});
+
 // Add a new hiker
 router.post('/hiker', async (req, res) => {
     try {

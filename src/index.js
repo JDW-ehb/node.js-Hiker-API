@@ -1,7 +1,7 @@
 // Require Express module
 let express = require('express') 
 // Require database connection
-const db = require('./db');
+const db = require('./database/db');
 const seedDB = require('./database/seedDB');
 
 

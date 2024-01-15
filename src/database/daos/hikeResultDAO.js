@@ -30,6 +30,12 @@ class HikerResultDAO {
         const [results] = await db.query(query, [mountainId]);
         return results;
     }
+    
+    async getAllHikeResults() {
+        const query = 'SELECT * FROM HikeResult';
+        const [results] = await db.query(query);
+        return results;
+    }
 }
 
 module.exports = HikerResultDAO;

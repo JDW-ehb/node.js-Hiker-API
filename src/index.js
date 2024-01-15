@@ -5,6 +5,12 @@ const db = require('./database/db');
 const seedDB = require('./database/seedDB');
 
 
+// Routes
+let MountainRoutes = require('./routes/MountainRoutes')
+let HikerRoutes = require('./routes/HikerRoutes')
+let HikeResultRoutes = require('./routes/HikeResultRoutes')
+
+
 // Test database connection
 db.query('SELECT 1')
   .then(() => {
@@ -30,6 +36,14 @@ app.get('/', (req, res) => {
   });
 
   
+// Middleware
+app.use(express.json())
+
+
+app.use(HikerRoutes)
+app.use(MountainRoutes)
+app.use(HikeResultRoutes)
+
 
 //start server
 app.listen(PORT, () => console.info('Server is running on port '))  

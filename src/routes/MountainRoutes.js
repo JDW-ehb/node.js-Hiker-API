@@ -41,6 +41,18 @@ router.post('/mountains', async (req, res) => {
     }
 });
 
+// Add hiker to mountain
+router.post('/mountains/hikers', async (req, res) => {
+    try {
+        const mountainId = parseInt(req.params.id);
+        const { hikerId } = req.body;
+        const result = await mountainDAO.addHikerToMountain(mountainId, hikerId);
+        res.status(201).send(`Hiker added to mountain with ID: ${result.insertId}`);
+    } catch (error) {
+        res.status(500).send('Error adding hiker to mountain: ' + error.message);
+    }
+});
+
 // Update a mountain
 router.put('/mountains/:id', async (req, res) => {
     try {

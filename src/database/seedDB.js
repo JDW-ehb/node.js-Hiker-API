@@ -6,7 +6,7 @@ module.exports = { createAllTables };
 async function createAllTables() {
     await createMountainTable();
     await createHikerTable();
-    await createMountainHikerTable();
+    await createCheckpointsTable();
     await createHikeResultTable();
 }
 
@@ -25,7 +25,7 @@ const createMountainTable = async () => {
         );
     `;
     await db.query(query);
-    console.log('Mountain table created successfully');
+    console.log('Mountain table created or already created');
 };
 
 // Create Hiker if not exist
@@ -40,21 +40,22 @@ const createHikerTable = async () => {
         );
     `;
     await db.query(query);
-    console.log('Hiker table created successfully');
+    console.log('Hiker table created or already created');
 };
 
-// Create MountainHiker if not exist
-const createMountainHikerTable = async () => {
+// Create Checkpoints if not exist
+const createCheckpointsTable = async () => {
     const query = `
-        CREATE TABLE IF NOT EXISTS MountainHiker (
+        CREATE TABLE IF NOT EXISTS Checkpoints (
+            Id INT,
             MountainId INT,
-            HikerId INT,
-            FOREIGN KEY (MountainId) REFERENCES Mountain(Id),
-            FOREIGN KEY (HikerId) REFERENCES Hiker(Id)
+            Name VARCHAR(255),
+            Height DECIMAL,
+            FOREIGN KEY (MountainId) REFERENCES Mountain(Id)
         );
     `;
     await db.query(query);
-    console.log('MountainHiker table created successfully');
+    console.log('MountainHiker table created or already created');
 };
 
 // Create HikeResult if not exist
@@ -70,5 +71,5 @@ const createHikeResultTable = async () => {
         );
     `;
     await db.query(query);
-    console.log('HikeResult table created successfully');
+    console.log('HikeResult table created or already created');
 };

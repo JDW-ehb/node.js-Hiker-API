@@ -9,6 +9,7 @@ const seedDB = require('./database/seedDB');
 let MountainRoutes = require('./routes/MountainRoutes')
 let HikerRoutes = require('./routes/HikerRoutes')
 let HikeResultRoutes = require('./routes/HikeResultRoutes')
+let CheckpointRoutes = require('./routes/checkpointRoutes')
 
 
 // Test database connection
@@ -43,6 +44,7 @@ app.use(express.json())
 app.use(HikerRoutes)
 app.use(MountainRoutes)
 app.use(HikeResultRoutes)
+app.use(CheckpointRoutes)
 
 
 //start server
